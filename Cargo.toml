@@ -8,14 +8,27 @@ codegen-units = 1
 lto = true
 
 [dependencies]
-reqwasm = "0.5"
-serde = { version = "1", features = ["derive"] }
 log = "0.4"
 console_log = "1"
 console_error_panic_hook = "0.1"
 thiserror = "1"
 leptos = {version = "0.4.9", features = ["csr","nightly"] }
 chrono = "0.4.26"
+serde = { version = "1", features = ["derive"] }
+gloo-net = { version = "0.2", features = ["http"] }
+
+[features]
+csr = ["leptos/csr", "leptos_meta/csr", "leptos_router/csr"]
+hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
+ssr = [
+	"dep:actix-files",
+	"dep:actix-web",
+	"dep:leptos_actix",
+	"leptos/ssr",
+	"leptos_meta/ssr",
+	"leptos_router/ssr",
+]
+
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
